@@ -18,16 +18,23 @@ public class MakeChange {
 
 		System.out.print("Please enter the price of item: ");
 		int priceInPennies = getInputFromUser(keyboard);
-		System.out.println((priceInPennies / 100.0));
-		System.out.print("How much money do want to give me");
+		//System.out.println((priceInPennies / 100.0));
+		System.out.print("How much money do want to give me: ");
 		int moneyInPennies = getInputFromUser(keyboard);
-		System.out.println(moneyInPennies / 100.0);
+		//System.out.println(moneyInPennies / 100.0);
 		while(priceInPennies > moneyInPennies) {
 			System.out.println("Hey budy this aint a cherity you need enuf money to pay for it");
-			System.out.print("Give me the correct amount ");
+			System.out.print("Give me the correct amount: ");
 			moneyInPennies = getInputFromUser(keyboard);
 		}
-		
+		int changeInPennies = moneyInPennies - priceInPennies;
+		//System.out.println("money: " + moneyInPennies + " price: " + priceInPennies + " change : " + changeInPennies);
+		if(changeInPennies == 0) {
+			System.out.println("You have don't have any change");
+		} else {
+			displayChange(changeInPennies);
+		}
+		System.out.println("Thank you for shopping at S mart");
 	}
 	
 	/**
@@ -40,7 +47,7 @@ public class MakeChange {
 	}
 	
 	public static void displayChange(int change) {
-		
+		System.out.println("your change " + (change/100.0));
 	}
 	
 	public static int figureHowMuchOfEach(int total, int dem) {
