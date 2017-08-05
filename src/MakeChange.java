@@ -19,20 +19,19 @@ public class MakeChange {
 	 */
 	public static void runRegister(Scanner keyboard) {
 
-		System.out.print("Please enter the price of item: ");// ask for price
+		System.out.print("Amount: ");// ask for price
 		int priceInPennies = getInputFromUser(keyboard);
-		System.out.print("How much money do want to give me: ");// ask for amount Tendered
+		System.out.print("Tendered: ");// ask for amount Tendered
 		int moneyInPennies = getInputFromUser(keyboard);
 		if(priceInPennies > moneyInPennies) { // checks to see if amount Tendered is less then cost
-			System.out.println("Hey budy you need enuf money to pay for it");
+			System.out.println("Hey budy you need enough money to pay for it");
 		} else {
 			int changeInPennies = moneyInPennies - priceInPennies;
 			if(changeInPennies == 0) { // checks to see if there no change left
 				System.out.print("You have don't have any change");
 			} else {
-				displayChange(changeInPennies); // runs the method that figures change and displays them 
+				figureOutChange(changeInPennies); // runs the method that figures change and displays them 
 			}
-			System.out.println("\nThank you for shopping at S mart");
 		}
 	}
 	
@@ -50,9 +49,9 @@ public class MakeChange {
 	/**
 	 * @param change
 	 */
-	public static void displayChange(int change) {
+	public static void figureOutChange(int change) {
 		int howMany;
-		double[] money = {20_00.0, 10_00.0, 5_00.0, 1_00.0, 25.0, 10.0, 5.0, 1.0}; // array of denomination
+		int[] money = {20_00, 10_00, 5_00, 1_00, 25, 10, 5, 1}; // array of denomination
 		System.out.println("Your change is :");
 		for(double dem: money) { // iterates through money array 
 			howMany = change / (int)dem; // checks to see how much of ech denomination there is
@@ -67,6 +66,19 @@ public class MakeChange {
 		}
 	}
 	
-	
+	public static void displayChange(int index, int amount) {
+		// 2d array with outer array denomination and inner single or plural
+		String[][] moneyNames = {{" twenty dollar bill", " twenty dollar bills"}, 
+								{" ten dollar bill", " ten dollar bills"},
+								{" five dollar bill", " five dollar bills"},
+								{" one dollar bill", " one dollar bills"},
+								{" quarter", " quarters"},
+								{" dime", " dimes"},
+								{" nickel", " nickels"},
+								{" penny", " pennies"}};
+		int s = amount > 1 ? 1 : 0; //determines if displaying single or plural name
+		System.out.println(amount + moneyNames[index][s]);
+		
+	}
 
 }
