@@ -11,11 +11,13 @@ public class MakeChange {
 	public static void main(String[] args) {
 		Scanner keyboard = new Scanner(System.in);
 		runRegister(keyboard);
+		keyboard.close();
 	}
 	
 	/**
 	 * this method runs the register. 
-	 * @param keyboard
+	 * 
+	 * @param keyboard scanner object 
 	 */
 	public static void runRegister(Scanner keyboard) {
 
@@ -38,8 +40,8 @@ public class MakeChange {
 	/**
 	 * get input from user as a double and formats it to int in pennies
 	 * 
-	 * @param keyboard
-	 * @return
+	 * @param keyboard Scanner object 
+	 * @return returns the converted input
 	 */
 	public static int getInputFromUser(Scanner keyboard) {
 		double input = keyboard.nextDouble(); //takes in a double
@@ -47,25 +49,34 @@ public class MakeChange {
 	}
 	
 	/**
-	 * @param change
+	 * loops through money array that holds all of the denomination
+	 * and figures out how much of each then pass the amount to displayChange
+	 * if there is no amount for denomination it will skip printing
+	 * if there no change left, leaves the loop 
+	 * @param change left over change after paying fo product
 	 */
 	public static void figureOutChange(int change) {
 		int howMany;
 		int[] money = {20_00, 10_00, 5_00, 1_00, 25, 10, 5, 1}; // array of denomination
 		System.out.println("Your change is :");
-		for(double dem: money) { // iterates through money array 
-			howMany = change / (int)dem; // checks to see how much of ech denomination there is
-			change = change % (int)dem; // figures out the left over change
+		for(int i = 0; i < money.length; i++) { // iterates through money array 
+			howMany = change / money[i]; // checks to see how much of ech denomination there is
+			change = change %  money[i]; // figures out the left over change
 			if( howMany == 0) { //if there is 0 of this denomination it skips it
 				continue;
 			}
-			System.out.print((dem/100) + ": " + howMany + " "); // displays change amount for each denomination
+			displayChange(i, howMany); // displays change amount for each denomination
 			if(change == 0) { // check to see if it runs out of change if so leaves the loop
 				break;
 			}
 		}
 	}
 	
+	/**
+	 * displays the word of each denomination and amount
+	 * @param index index of the denomination
+	 * @param amount how much of the denomination
+	 */
 	public static void displayChange(int index, int amount) {
 		// 2d array with outer array denomination and inner single or plural
 		String[][] moneyNames = {{" twenty dollar bill", " twenty dollar bills"}, 
@@ -77,7 +88,7 @@ public class MakeChange {
 								{" nickel", " nickels"},
 								{" penny", " pennies"}};
 		int s = amount > 1 ? 1 : 0; //determines if displaying single or plural name
-		System.out.println(amount + moneyNames[index][s]);
+		System.out.println(amount + moneyNames[index][s]); //formats and displays results
 		
 	}
 
