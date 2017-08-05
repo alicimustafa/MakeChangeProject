@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 /**
+ * this class take cost and amount Tendered
+ * and return proper change
  * @author mustafaalici
  *
  */
@@ -12,53 +14,57 @@ public class MakeChange {
 	}
 	
 	/**
+	 * this method runs the register. 
 	 * @param keyboard
 	 */
 	public static void runRegister(Scanner keyboard) {
 
-		System.out.print("Please enter the price of item: ");
+		System.out.print("Please enter the price of item: ");// ask for price
 		int priceInPennies = getInputFromUser(keyboard);
-		System.out.print("How much money do want to give me: ");
+		System.out.print("How much money do want to give me: ");// ask for amount Tendered
 		int moneyInPennies = getInputFromUser(keyboard);
-		while(priceInPennies > moneyInPennies) {
-			System.out.println("Hey budy this aint a cherity you need enuf money to pay for it");
-			System.out.print("Give me the correct amount: ");
-			moneyInPennies = getInputFromUser(keyboard);
-		}
-		int changeInPennies = moneyInPennies - priceInPennies;
-		if(changeInPennies == 0) {
-			System.out.print("You have don't have any change");
+		if(priceInPennies > moneyInPennies) { // checks to see if amount Tendered is less then cost
+			System.out.println("Hey budy you need enuf money to pay for it");
 		} else {
-			displayChange(changeInPennies);
+			int changeInPennies = moneyInPennies - priceInPennies;
+			if(changeInPennies == 0) { // checks to see if there no change left
+				System.out.print("You have don't have any change");
+			} else {
+				displayChange(changeInPennies); // runs the method that figures change and displays them 
+			}
+			System.out.println("\nThank you for shopping at S mart");
 		}
-		System.out.println("\nThank you for shopping at S mart");
 	}
 	
 	/**
+	 * get input from user as a double and formats it to int in pennies
+	 * 
 	 * @param keyboard
 	 * @return
 	 */
 	public static int getInputFromUser(Scanner keyboard) {
-		double input = keyboard.nextDouble();
-		return (int)(input * 100);
+		double input = keyboard.nextDouble(); //takes in a double
+		return (int)(input * 100);  // converts doller to pennies cast it to int and returns it
 	}
 	
+	/**
+	 * @param change
+	 */
 	public static void displayChange(int change) {
 		int howMany;
-		double[] money = {20_00.0, 10_00.0, 5_00.0, 1_00.0, 25.0, 10.0, 5.0, 1.0};
+		double[] money = {20_00.0, 10_00.0, 5_00.0, 1_00.0, 25.0, 10.0, 5.0, 1.0}; // array of denomination
 		System.out.println("Your change is :");
-		for(double dem: money) {
-			howMany = change / (int)dem;
-			change = change % (int)dem;
-			if( howMany == 0) {
+		for(double dem: money) { // iterates through money array 
+			howMany = change / (int)dem; // checks to see how much of ech denomination there is
+			change = change % (int)dem; // figures out the left over change
+			if( howMany == 0) { //if there is 0 of this denomination it skips it
 				continue;
 			}
-			System.out.print((dem/100) + ": " + howMany + " ");
-			if(change == 0) {
+			System.out.print((dem/100) + ": " + howMany + " "); // displays change amount for each denomination
+			if(change == 0) { // check to see if it runs out of change if so leaves the loop
 				break;
 			}
 		}
-	    howMany = change / 20_00;
 	}
 	
 	
