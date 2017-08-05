@@ -18,23 +18,20 @@ public class MakeChange {
 
 		System.out.print("Please enter the price of item: ");
 		int priceInPennies = getInputFromUser(keyboard);
-		//System.out.println((priceInPennies / 100.0));
 		System.out.print("How much money do want to give me: ");
 		int moneyInPennies = getInputFromUser(keyboard);
-		//System.out.println(moneyInPennies / 100.0);
 		while(priceInPennies > moneyInPennies) {
 			System.out.println("Hey budy this aint a cherity you need enuf money to pay for it");
 			System.out.print("Give me the correct amount: ");
 			moneyInPennies = getInputFromUser(keyboard);
 		}
 		int changeInPennies = moneyInPennies - priceInPennies;
-		//System.out.println("money: " + moneyInPennies + " price: " + priceInPennies + " change : " + changeInPennies);
 		if(changeInPennies == 0) {
-			System.out.println("You have don't have any change");
+			System.out.print("You have don't have any change");
 		} else {
 			displayChange(changeInPennies);
 		}
-		System.out.println("Thank you for shopping at S mart");
+		System.out.println("\nThank you for shopping at S mart");
 	}
 	
 	/**
@@ -47,12 +44,21 @@ public class MakeChange {
 	}
 	
 	public static void displayChange(int change) {
-		System.out.println("your change " + (change/100.0));
-	}
-	
-	public static int figureHowMuchOfEach(int total, int dem) {
-		
-		return 0;
+		int howMany;
+		double[] money = {20_00.0, 10_00.0, 5_00.0, 1_00.0, 25.0, 10.0, 5.0, 1.0};
+		System.out.println("Your change is :");
+		for(double dem: money) {
+			howMany = change / (int)dem;
+			change = change % (int)dem;
+			if( howMany == 0) {
+				continue;
+			}
+			System.out.print((dem/100) + ": " + howMany + " ");
+			if(change == 0) {
+				break;
+			}
+		}
+	    howMany = change / 20_00;
 	}
 	
 	
